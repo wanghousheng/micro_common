@@ -50,3 +50,27 @@ type RedisConfig struct {
 type CachedConfig struct {
 	Config *RedisConfig
 }
+
+// GetMysqlFromConsul 获取mysql的配置
+func GetMysqlFromConsul(config config.Config, path ...string) *MysqlConfig {
+	mysqlConfig := &MysqlConfig{}
+	//获取配置
+	_ = config.Get(path...).Scan(mysqlConfig)
+	return mysqlConfig
+}
+
+// GetRedisFromConsul  获取redis的配置
+func GetRedisFromConsul(config config.Config, path ...string) *RedisConfig {
+	redisConfig := &RedisConfig{}
+	//获取配置
+	_ = config.Get(path...).Scan(redisConfig)
+	return redisConfig
+}
+
+// GetCacheFromConsul  获取redis的配置
+func GetCacheFromConsul(config config.Config, path ...string) *CachedConfig {
+	redisConfig := &CachedConfig{}
+	//获取配置
+	_ = config.Get(path...).Scan(redisConfig)
+	return redisConfig
+}
