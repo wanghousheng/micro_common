@@ -2,6 +2,7 @@ package common
 
 import (
 	"fmt"
+	"github.com/spf13/cast"
 	"github.com/wanghousheng/micro_common/cache"
 	"github.com/wanghousheng/micro_common/database"
 	"github.com/wanghousheng/micro_common/redis"
@@ -16,7 +17,7 @@ func SetupDB(config *MysqlConfig) {
 		config.User,
 		config.Password,
 		config.Host,
-		config.Port,
+		cast.ToInt(config.Port),
 		config.Database,
 		config.Charset,
 	)
@@ -26,21 +27,21 @@ func SetupDB(config *MysqlConfig) {
 	// 连接数据库
 	database.Connect(dbConfig)
 	// 设置最大连接数
-	database.SQLDB.SetMaxOpenConns(config.OpenConnections)
+	database.SQLDB.SetMaxOpenConns(cast.ToInt(config.OpenConnections))
 	// 设置最大空闲连接数
-	database.SQLDB.SetMaxIdleConns(config.IdleConnections)
+	database.SQLDB.SetMaxIdleConns(cast.ToInt(config.IdleConnections))
 	// 设置每个链接的过期时间
-	database.SQLDB.SetConnMaxLifetime(time.Duration(config.LifeSeconds) * time.Second)
+	database.SQLDB.SetConnMaxLifetime(time.Duration(cast.ToInt(config.LifeSeconds)) * time.Second)
 }
 
 // SetupRedis 初始化 Redis
 func SetupRedis(config *RedisConfig) {
 	// 建立 Redis 连接
 	redis.ConnectRedis(
-		fmt.Sprintf("%v:%v", config.Host, config.Port),
+		fmt.Sprintf("%v:%v", config.Host, cast.ToInt(config.Port)),
 		config.User,
 		config.Password,
-		config.Database,
+		cast.ToInt(config.Database),
 	)
 }
 

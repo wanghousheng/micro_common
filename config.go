@@ -29,11 +29,11 @@ type MysqlConfig struct {
 	User            string `json:"user"`
 	Password        string `json:"password"`
 	Database        string `json:"database"`
-	Port            int    `json:"port"`
+	Port            string `json:"port"`
 	Charset         string `json:"charset"`
-	OpenConnections int    `json:"open_connections"` //最大连接数
-	IdleConnections int    `json:"idle_connections"` //最大空闲连接数
-	LifeSeconds     int    `json:"life_Seconds"`     //连接过期时间
+	OpenConnections string `json:"open_connections"` //最大连接数
+	IdleConnections string `json:"idle_connections"` //最大空闲连接数
+	LifeSeconds     string `json:"life_Seconds"`     //连接过期时间
 }
 
 // RedisConfig redis 配置信息
@@ -41,8 +41,8 @@ type RedisConfig struct {
 	Host     string `json:"host"`
 	User     string `json:"user"`
 	Password string `json:"password"`
-	Database int    `json:"database"`
-	Port     int    `json:"port"`
+	Database string `json:"database"`
+	Port     string `json:"port"`
 	Prefix   string `json:"prefix"`
 }
 
