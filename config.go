@@ -1,4 +1,4 @@
-package common
+package main
 
 import (
 	"github.com/asim/go-micro/plugins/config/source/consul/v3"
