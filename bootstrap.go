@@ -45,14 +45,14 @@ func SetupRedis(config *RedisConfig) {
 }
 
 // SetupCache 缓存
-func SetupCache(config *CachedConfig) {
+func SetupCache(config *RedisConfig) {
 	// 初始化缓存专用的redis
 	rds := cache.NewRedisStore(
-		fmt.Sprintf("%v:%v", config.Config.Host, config.Config.Port),
-		config.Config.User,
-		config.Config.Password,
-		config.Config.Database,
-		config.Config.Prefix,
+		fmt.Sprintf("%v:%v", config.Host, config.Port),
+		config.User,
+		config.Password,
+		0,
+		config.Prefix,
 	)
 	cache.InitWithCacheStore(rds)
 }

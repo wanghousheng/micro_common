@@ -46,11 +46,6 @@ type RedisConfig struct {
 	Prefix   string `json:"prefix"`
 }
 
-// CachedConfig 缓存配置信息
-type CachedConfig struct {
-	Config *RedisConfig
-}
-
 // GetMysqlFromConsul 获取mysql的配置
 func GetMysqlFromConsul(config config.Config, path ...string) *MysqlConfig {
 	mysqlConfig := &MysqlConfig{}
@@ -68,8 +63,8 @@ func GetRedisFromConsul(config config.Config, path ...string) *RedisConfig {
 }
 
 // GetCacheFromConsul  获取redis的配置
-func GetCacheFromConsul(config config.Config, path ...string) *CachedConfig {
-	redisConfig := &CachedConfig{}
+func GetCacheFromConsul(config config.Config, path ...string) *RedisConfig {
+	redisConfig := &RedisConfig{}
 	//获取配置
 	_ = config.Get(path...).Scan(redisConfig)
 	return redisConfig
