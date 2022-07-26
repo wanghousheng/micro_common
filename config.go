@@ -61,11 +61,3 @@ func GetRedisFromConsul(config config.Config, path ...string) *RedisConfig {
 	_ = config.Get(path...).Scan(redisConfig)
 	return redisConfig
 }
-
-// GetCacheFromConsul  获取redis的配置
-func GetCacheFromConsul(config config.Config, path ...string) *RedisConfig {
-	redisConfig := &RedisConfig{}
-	//获取配置
-	_ = config.Get(path...).Scan(redisConfig)
-	return redisConfig
-}

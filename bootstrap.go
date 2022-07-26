@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/spf13/cast"
-	"github.com/wanghousheng/micro_common/cache"
 	"github.com/wanghousheng/micro_common/database"
 	"github.com/wanghousheng/micro_common/redis"
 	"gorm.io/driver/mysql"
@@ -43,17 +42,4 @@ func SetupRedis(config *RedisConfig) {
 		config.Password,
 		cast.ToInt(config.Database),
 	)
-}
-
-// SetupCache 缓存
-func SetupCache(config *RedisConfig) {
-	// 初始化缓存专用的redis
-	rds := cache.NewRedisStore(
-		fmt.Sprintf("%v:%v", config.Host, config.Port),
-		config.User,
-		config.Password,
-		0,
-		config.Prefix,
-	)
-	cache.InitWithCacheStore(rds)
 }
