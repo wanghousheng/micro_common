@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 )
 
@@ -21,6 +22,7 @@ func Connect(dbConfig gorm.Dialector) {
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true, //不用负数
 		},
+		Logger: logger.Default.LogMode(logger.Info),
 	})
 	// 处理错误
 	if err != nil {
